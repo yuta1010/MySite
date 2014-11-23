@@ -3,13 +3,14 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_gravity="center"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Score"
-        android:textSize="24sp"
+        android:textSize="50sp"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal" />
 
@@ -17,16 +18,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="0/0"
-        android:textSize="250sp"
+        android:textSize="200sp"
         android:id="@+id/resultText"
         android:layout_gravity="right"
         android:textColor="#ffffbb54" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="241dp"
         android:layout_height="wrap_content"
+        android:layout_margin="50dp"
         android:text="もう一度サイトを見る?"
         android:onClick="replayQuiz"
         android:id="@+id/replayButton"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.47" />
 </LinearLayout>
