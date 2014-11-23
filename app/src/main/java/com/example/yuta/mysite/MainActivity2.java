@@ -21,7 +21,7 @@ import java.util.Collections;
 public class MainActivity2 extends Activity {
 
     public  final static String EXTRA_MYSCORE = "com.example.yuta.mysite.MYSCORE";
-    //AndroidManifestからpackage名を取ってきてそれに好きな名前を付けるやり方が多い
+    //AndroidManifestからpackage名を取ってきてそれに好きな名前を付ける(今回はMYSCOREを付けた)
 
     private ArrayList<String[]> quizList = new ArrayList<String[]>();
     //ArrayListでquiz.txtで作ったものをquizListという変数に一行ずつ一つの配列とし管理
@@ -107,7 +107,7 @@ public class MainActivity2 extends Activity {
         String clickedAnswer = clickedButton.getText().toString();
         //答えをチェック
         if (clickedAnswer.equals(quizList.get(currentQuiz)[1])){
-            //0 番目が質問文で、その次に来る最初の選択肢が正解という仕様
+            //0 番目が質問文で、その次に来る最初の選択肢が正解
 
             clickedButton.setTextColor(0xD2CB1010);
             clickedButton.setText("○" + clickedAnswer);
@@ -174,6 +174,7 @@ public class MainActivity2 extends Activity {
         a1Button.setEnabled(true);
         a2Button.setEnabled(true);
         a3Button.setEnabled(true);
+        //ボタンを押せるようにする
 
         nextButton.setEnabled(false);
         //nextButtonを使えないようにしておく
@@ -201,8 +202,9 @@ public class MainActivity2 extends Activity {
                 //ファイルから 1 行読んで s に入れる(nullでないとき)
 
                 String[] divide = s.split(",");
-                quizList.add(divide);
+                //","で区切る
 
+                quizList.add(divide);
                 // s の中には,区切りの 1 行が入っているので、それをタブで分割して quizList に突っ込んでいけば OK です。
             }
         } catch (IOException e) {

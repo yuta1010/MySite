@@ -24,6 +24,7 @@ import java.util.logging.LogRecord;
 
 public class MainActivity extends Activity {
 
+    //変数の定義
     private WebView mySite;
     private static final String INITIAL_WEBSITE = "http://riead-fashion.secret.jp/";
     private Button button;
@@ -42,21 +43,22 @@ public class MainActivity extends Activity {
         //これでほかのページに移動したときにブラウザに飛ばない
 
         mySite.loadUrl(INITIAL_WEBSITE);
+        //mySiteの表示するUrlを取ってくる
 
        button = (Button) findViewById(R.id.button);
+        //ボタンがクリックされた時に呼び出されるコールバックリスナーを登録
 
         button.setOnClickListener( new View.OnClickListener() {
-
             //ボタンが押されたら何かする
             @Override
             public void onClick(View v) {
 
-                //インテントに、この画面と、遷移する別の画面を指定する
+                //以下にインテントに、この画面と、遷移する別の画面を指定する
                 Intent intent = new Intent();
                 intent.setClassName("com.example.yuta.mysite", "com.example.yuta.mysite.MainActivity2");
 
-                //インテントで指定した別の画面に遷移する
                 startActivity(intent);
+                //インテントで指定した別の画面に遷移する
             }
         });
     }
@@ -72,12 +74,14 @@ public class MainActivity extends Activity {
         super.onBackPressed();
     }
 
+    //以下に何個も開いてメモリをあまり使わないようにする
     @Override
     protected  void onDestroy(){
         super.onDestroy();
         mySite.stopLoading();
         mySite.destroy();
     }
+
 
 
     //以下optionBar

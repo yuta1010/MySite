@@ -10,20 +10,23 @@
         android:layout_height="wrap_content"
         android:text="Your Score"
         android:textSize="24sp"
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="0/0"
-        android:padding="50dp"
-        android:textSize="70sp"
-        android:id="@+id/resultText" />
+        android:textSize="250sp"
+        android:id="@+id/resultText"
+        android:layout_gravity="right"
+        android:textColor="#ffffbb54" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="もう一度サイトを見る?"
         android:onClick="replayQuiz"
-        android:id="@+id/replayButton" />
+        android:id="@+id/replayButton"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
