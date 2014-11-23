@@ -109,12 +109,13 @@ public class MainActivity2 extends Activity {
         if (clickedAnswer.equals(quizList.get(currentQuiz)[1])){
             //0 番目が質問文で、その次に来る最初の選択肢が正解という仕様
 
+            clickedButton.setTextColor(0xD2CB1010);
             clickedButton.setText("○" + clickedAnswer);
-
             score++;
             showScore();
         }
         else {
+            clickedButton.setTextColor(0xFF4455B4);
             clickedButton.setText("×" + clickedAnswer);
 
 
@@ -152,7 +153,7 @@ public class MainActivity2 extends Activity {
         for (int i = 1; i < quizTexts.length; i++){
             answers.add(quizTexts[i]);
         }
-        //そのあとに現在の問題の配列の 1 から 4 までの値をセット
+        //そのあとに現在の問題の配列の 1 からquizTexts.lengthの長さまでの値をセット
 
         Collections.shuffle(answers);
         //答えをシャッフルする
@@ -163,6 +164,12 @@ public class MainActivity2 extends Activity {
         a3Button.setText(answers.get(3));
         //ボタンに答えを入れていく
 
+        a0Button.setTextColor(0xFF000000);
+        a1Button.setTextColor(0xFF000000);
+        a2Button.setTextColor(0xFF000000);
+        a3Button.setTextColor(0xFF000000);
+        //ボタンの色を黒に戻す
+
         a0Button.setEnabled(true);
         a1Button.setEnabled(true);
         a2Button.setEnabled(true);
@@ -170,6 +177,7 @@ public class MainActivity2 extends Activity {
 
         nextButton.setEnabled(false);
         //nextButtonを使えないようにしておく
+
 
         showScore();
         //スコアを表示

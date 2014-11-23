@@ -14,7 +14,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="center"
         android:onClick="quiz"
-        android:textColor="#ffff506e" />
+        android:textColor="#ff33143b" />
 
     <WebView
         android:layout_width="match_parent"
