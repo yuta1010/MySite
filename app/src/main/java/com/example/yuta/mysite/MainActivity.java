@@ -63,6 +63,24 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (mySite.canGoBack()){
+            mySite.goBack();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected  void onDestroy(){
+        super.onDestroy();
+        mySite.stopLoading();
+        mySite.destroy();
+    }
+
+
+    //以下optionBar
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
