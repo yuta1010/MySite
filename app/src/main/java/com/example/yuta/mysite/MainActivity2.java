@@ -100,7 +100,7 @@ public class MainActivity2 extends Activity {
     }
     //replayされたときに最初の問題に戻るようにしボタンも直す
 
-    public  void CheckAnswers(View view){
+    public  void checkAnswer(View view){
         Button clickedButton = (Button) view;
         //clickedButtonでクリックされた答えを取得
         String clickedAnswer = clickedButton.getText().toString();
