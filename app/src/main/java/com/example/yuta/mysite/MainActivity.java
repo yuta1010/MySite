@@ -52,16 +52,17 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 //インテントに、この画面と、遷移する別の画面を指定する
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                Intent intent = new Intent();
+                intent.setClassName("com.example.yuta.mysite", "com.example.yuta.mysite.MainActivity2");
 
                 //インテントで指定した別の画面に遷移する
                 startActivity(intent);
             }
         });
-
-
     }
 
+
+    //以下端末の戻るボタンの処理
     @Override
     public void onBackPressed() {
         if (mySite.canGoBack()){

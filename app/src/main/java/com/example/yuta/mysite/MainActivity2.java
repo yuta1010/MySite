@@ -3,31 +3,27 @@ package com.example.yuta.mysite;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.example.yuta.mysite.MyResult;
-import com.example.yuta.mysite.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Collections;
 
 
 public class MainActivity2 extends Activity {
 
-    public  final static String EXTRA_MYSCORE = "com.example.yuta.mysite.MainActivity.MYSCORE";
+    public  final static String EXTRA_MYSCORE = "com.example.yuta.mysite.MYSCORE";
     //AndroidManifestからpackage名を取ってきてそれに好きな名前を付けるやり方が多い
 
-    private ArrayList<String[]> quizSet = new ArrayList<String[]>();
-    //ArrayListでquiz.txtで作ったものを一行ずつ一つの配列とし管理
+    private ArrayList<String[]> quizList = new ArrayList<String[]>();
+    //ArrayListでquiz.txtで作ったものをquizListという変数に一行ずつ一つの配列とし管理
 
     private TextView scoreText;
     private TextView qText;
@@ -47,13 +43,13 @@ public class MainActivity2 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        loadQuizSet();
-        //quiz.txtを読み込む
+        setContentView(R.layout.activity_main_activity2);
 
         getViews();
         //viewを取得する
+
+        loadQuizSet();
+        //quiz.txtを読み込む
 
         setQuiz();
         //画面に質問を表示する
@@ -72,15 +68,15 @@ public class MainActivity2 extends Activity {
     }
 
     private  void showScore(){
-        scoreText.setText("Score: " + score + " / " +quizSet.size());
+        scoreText.setText("Score: " + score + " / " + quizList.size());
     }
     // scoreText に表示するためのメソッド
 
     public  void goNext(View view) {
-        if (currentQuiz == quizSet.size()) {
+        if (currentQuiz == quizList.size()) {
             //最後の問題
             Intent intent = new Intent(this, MyResult.class);
-            intent.putExtra(EXTRA_MYSCORE, score + " / " + quizSet.size());
+            intent.putExtra(EXTRA_MYSCORE, score + " / " + quizList.size());
             //resultActivityに正当数を送る
             startActivity(intent);
             //次のActivityにいく
@@ -109,7 +105,7 @@ public class MainActivity2 extends Activity {
         //clickedButtonでクリックされた答えを取得
         String clickedAnswer = clickedButton.getText().toString();
         //答えをチェック
-        if (clickedAnswer.equals(quizSet.get(currentQuiz)[1])){
+        if (clickedAnswer.equals(quizList.get(currentQuiz)[1])){
             //0 番目が質問文で、その次に来る最初の選択肢が正解という仕様
 
             clickedButton.setText("○" + clickedAnswer);
@@ -134,7 +130,7 @@ public class MainActivity2 extends Activity {
         currentQuiz++;
         //次のクイズにいく
 
-        if (currentQuiz == quizSet.size()) {
+        if (currentQuiz == quizList.size()) {
             nextButton.setText("Check Result");
         }
         //最後の問題の時nextボタンをCheck Resultという文字にする
@@ -142,13 +138,16 @@ public class MainActivity2 extends Activity {
 
 
     private void setQuiz(){
-        qText.setText(quizSet.get(currentQuiz)[0]);
+        String question = quizList.get(currentQuiz)[0];
+        qText.setText(question);
         //質問文をセット(currentQuizはいちばん最初の問題[0]は質問文は配列の一個目)
 
         ArrayList<String> answers = new ArrayList<String>();
+
+        String[] quizTexts =quizList.get(currentQuiz);
         //答えの選択肢をセット
-        for (int i = 1; i < 5 ; i++){
-            answers.add(quizSet.get(currentQuiz)[i]);
+        for (int i = 1; i < quizTexts.length; i++){
+            answers.add(quizTexts[i]);
         }
         //そのあとに現在の問題の配列の 1 から 4 までの値をセット
 
@@ -181,15 +180,24 @@ public class MainActivity2 extends Activity {
         //ファイルを読み込むのに必要なもの(上二つ)
         try {
             inputStream = getAssets().open("quiz.txt");
-            //inputStreamでgetAssetsのメソッドを使うと、assets フォルダにあるファイルを読みこむ。
+            //inputStreamでgetAssetsのメソッドを使うと、quiz.txt フォルダにあるファイルを読みこむ。
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             // bufferedReaderをインスタンス化
             String s;
             //1 行ずつ読み込んでいくのですが、読み込んだものを入れる s という文字列を定義しておきます。
             while ((s = bufferedReader.readLine()) != null) {
+
+                Log.e("MYLOG",s);
                 //ファイルから 1 行読んで s に入れる(nullでないとき)
-                quizSet.add(s.split("\t"));
-                // s の中にはタブ区切りの 1 行が入っているので、それをタブで分割して quizSet に突っ込んでいけば OK です。
+
+                String[] divide = s.split(",");
+                quizList.add(divide);
+
+                Log.e("MYLOG divide", Arrays.asList(divide).toString());
+
+
+
+                // s の中には,区切りの 1 行が入っているので、それをタブで分割して quizList に突っ込んでいけば OK です。
             }
         } catch (IOException e) {
             //ファイルを読み込むときには例外処理をしなくてはいけない
@@ -207,6 +215,8 @@ public class MainActivity2 extends Activity {
                 //ストリームを閉じる処理
             }
         }
+
+        Log.e("MYLOG", quizList.toString());
 
 //一行ずつ読み込んでStringの配列にしてQuizSetに入れる
     }

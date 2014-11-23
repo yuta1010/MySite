@@ -36,7 +36,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:onClick="checkAnswer"
-            android:id="@+id/a0Button" />
+            android:id="@+id/a0Button"
+            android:text="a0" />
 
         <Button
             android:layout_width="match_parent"
