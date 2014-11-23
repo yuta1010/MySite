@@ -2,6 +2,7 @@ package com.example.yuta.mysite;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -109,11 +110,13 @@ public class MainActivity2 extends Activity {
             //0 番目が質問文で、その次に来る最初の選択肢が正解という仕様
 
             clickedButton.setText("○" + clickedAnswer);
+
             score++;
             showScore();
         }
         else {
             clickedButton.setText("×" + clickedAnswer);
+
 
         }
         //正解とclickedAnswerが同じかチェック
@@ -187,15 +190,10 @@ public class MainActivity2 extends Activity {
             //1 行ずつ読み込んでいくのですが、読み込んだものを入れる s という文字列を定義しておきます。
             while ((s = bufferedReader.readLine()) != null) {
 
-                Log.e("MYLOG",s);
                 //ファイルから 1 行読んで s に入れる(nullでないとき)
 
                 String[] divide = s.split(",");
                 quizList.add(divide);
-
-                Log.e("MYLOG divide", Arrays.asList(divide).toString());
-
-
 
                 // s の中には,区切りの 1 行が入っているので、それをタブで分割して quizList に突っ込んでいけば OK です。
             }
@@ -215,8 +213,6 @@ public class MainActivity2 extends Activity {
                 //ストリームを閉じる処理
             }
         }
-
-        Log.e("MYLOG", quizList.toString());
 
 //一行ずつ読み込んでStringの配列にしてQuizSetに入れる
     }

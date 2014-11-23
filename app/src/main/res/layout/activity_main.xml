@@ -7,13 +7,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="クイズ"
+        android:text="洋服クイズ!!!"
         android:id="@+id/button"
         android:textSize="32sp"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:onClick="quiz"/>
+        android:onClick="quiz"
+        android:textColor="#ffff506e" />
 
     <WebView
         android:layout_width="match_parent"
